@@ -1,0 +1,32 @@
+{
+    "name": "strays/dcat-admin-redis",
+    "alias": "Redis 可视化面板",
+    "description": "可视化 Redis 后台管理面板",
+    "type": "library",
+    "keywords": ["dcat-admin", "redis"],
+    "homepage": "https://github.com/23tl/dcat-admin-redis",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Strays",
+            "email": "784494731@qq.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.1.0",
+        "dcat/laravel-admin": "~2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Strays\\DcatAdminRedis\\": "src/"
+        }
+    },
+    "extra": {
+        "dcat-admin": "Strays\\DcatAdminRedis\\DcatAdminRedisServiceProvider",
+        "laravel": {
+            "providers": [
+                "Strays\\DcatAdminRedis\\DcatAdminRedisServiceProvider"
+            ]
+        }
+    }
+}
