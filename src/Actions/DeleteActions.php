@@ -9,7 +9,8 @@ use Strays\DcatAdminRedis\RedisManager;
 
 class DeleteActions extends RowAction
 {
-    protected $hash, $type;
+    protected $hash;
+    protected $type;
 
     public function __construct($title = null, $hash = null, $type = null)
     {
@@ -32,7 +33,7 @@ HTML;
     public function confirm()
     {
         return [
-            "您确定要删除这行数据吗？",
+            '您确定要删除这行数据吗？',
         ];
     }
 
@@ -62,7 +63,6 @@ HTML;
 
         return $this->response()->success('删除成功')->refresh();
     }
-
 
     public function parameters()
     {

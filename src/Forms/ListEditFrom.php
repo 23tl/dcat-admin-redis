@@ -15,8 +15,6 @@ class listEditFrom extends Form implements LazyRenderable
     /**
      * Handle the form request.
      *
-     * @param array $input
-     *
      * @return mixed
      */
     public function handle(array $input)

@@ -15,6 +15,7 @@ class Service extends Donut
 
     /**
      * Service constructor.
+     *
      * @param $connection
      */
     public function __construct($connection)
@@ -24,16 +25,12 @@ class Service extends Donut
         parent::__construct();
     }
 
-    /**
-     *
-     */
     protected function init()
     {
         parent::init();
 
         $this->title(Trans::get('welcome.service'));
     }
-
 
     public function renderContent()
     {
@@ -62,7 +59,6 @@ HTML;
     }
 
     /**
-     * @param string $key
      * @return array|\ArrayAccess|mixed
      */
     protected function getRedisKey(string $key)
@@ -73,8 +69,8 @@ HTML;
     }
 
     /**
-     * 兼容使用（在 renderContent 中无法使用 静态方法）
-     * @param string $key
+     * 兼容使用（在 renderContent 中无法使用 静态方法）.
+     *
      * @return string
      */
     protected function getTransKey(string $key)

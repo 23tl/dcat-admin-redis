@@ -16,6 +16,7 @@ class DatabaseStatistics extends Donut
 
     /**
      * Service constructor.
+     *
      * @param $connection
      */
     public function __construct($connection)
@@ -25,7 +26,6 @@ class DatabaseStatistics extends Donut
         parent::__construct();
     }
 
-
     protected function init()
     {
         parent::init();
@@ -33,31 +33,32 @@ class DatabaseStatistics extends Donut
         $this->title(Trans::get('welcome.statistics'));
     }
 
-
     /**
-     * 格式化内容
+     * 格式化内容.
+     *
      * @return Grid
      */
     public function renderContent()
     {
         return new Grid(
             null, function (Grid $grid) {
-            $grid->column('name')->sortable();
-            $grid->column('keys')->sortable();
-            $grid->column('expires')->sortable();
-            $grid->column('avg')->sortable();
+                $grid->column('name')->sortable();
+                $grid->column('keys')->sortable();
+                $grid->column('expires')->sortable();
+                $grid->column('avg')->sortable();
 
-            $grid->disableActions();
-            $grid->disablePagination();
-            $grid->disableToolbar();
-            $grid->disableRowSelector();
-            $grid->model()->setData($this->generate());
-        }
+                $grid->disableActions();
+                $grid->disablePagination();
+                $grid->disableToolbar();
+                $grid->disableRowSelector();
+                $grid->model()->setData($this->generate());
+            }
         );
     }
 
     /**
-     * 设置 信息 源
+     * 设置 信息 源.
+     *
      * @return array
      */
     protected function generate()
@@ -79,6 +80,7 @@ class DatabaseStatistics extends Donut
                 }
             }
         }
+
         return $data;
     }
 }

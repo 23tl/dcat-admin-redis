@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Strays\DcatAdminRedis;
 
 use Illuminate\Redis\Connections\Connection;
@@ -14,7 +13,6 @@ use Strays\DcatAdminRedis\DataType\Zset;
 use Strays\DcatAdminRedis\Support\Arr;
 use Strays\DcatAdminRedis\Support\Str;
 
-
 class RedisManager
 {
     public static $typeColor = [
@@ -25,20 +23,21 @@ class RedisManager
         'set' => 'success',
     ];
 
-
     /**
      * @var
      */
     protected static $instance;
 
     /**
-     * Redis 实例
+     * Redis 实例.
+     *
      * @var
      */
     protected $connection;
 
     /**
      * RedisManager constructor.
+     *
      * @param string $connection
      */
     public function __construct($connection = 'default')
@@ -48,6 +47,7 @@ class RedisManager
 
     /**
      * @param string|null $connection
+     *
      * @return mixed
      */
     public static function instance($connection = 'default')
@@ -60,20 +60,22 @@ class RedisManager
     }
 
     /**
-     * 获取当前 Redis 实例
+     * 获取当前 Redis 实例.
+     *
      * @param null $connection
-     * @return Connection
      */
     public function getConnection($connection = null): Connection
     {
         if ($connection) {
             $this->connection = $connection;
         }
+
         return Redis::connection($this->connection);
     }
 
     /**
-     * 获取当前 Redis 信息
+     * 获取当前 Redis 信息.
+     *
      * @return mixed
      */
     public function getInformation()
@@ -82,9 +84,10 @@ class RedisManager
     }
 
     /**
-     * @param int $cursor
+     * @param int    $cursor
      * @param string $pattern
-     * @param int $count
+     * @param int    $count
+     *
      * @return array
      */
     public function scan($cursor = 0, $pattern = '*', $count = 10)
@@ -94,7 +97,7 @@ class RedisManager
         $result = $client->scan(
             $cursor,
             [
-                'match' => $pattern . '*',
+                'match' => $pattern.'*',
                 'count' => $count,
             ]
         );
@@ -107,7 +110,7 @@ class RedisManager
         }
 
         // 此处判断如果未搜索到，则进行递归搜索
-        if (count($result) === 2 && $result[0] > 0 && count($result[1]) <= $count) {
+        if (2 === count($result) && $result[0] > 0 && count($result[1]) <= $count) {
             return $this->scan($result[0], $pattern, $count);
         }
 
@@ -141,7 +144,6 @@ LUA;
     }
 
     /**
-     * @param string $key
      * @return mixed
      */
     public function fetch(string $key)
@@ -158,23 +160,23 @@ LUA;
         $key = $this->getRedisKey(Arr::get($params, 'origin'));
         $this->exists($key);
         $type = $this->getConnection()->type($key);
+
         return $this->getDataType($type)->update($params);
     }
 
     /**
-     * @param string $key
      * @return mixed
      */
     public function ttl(string $key)
     {
         $key = $this->getRedisKey($key);
         $this->exists($key);
+
         return $this->getConnection()->ttl($key);
     }
 
     /**
-     * 删除缓存
-     * @param array $keys
+     * 删除缓存.
      */
     public function delKeys(array $keys)
     {
@@ -191,10 +193,7 @@ LUA;
         );
     }
 
-
     /**
-     *
-     * @param string $key
      * @return string
      */
     public function getRedisKey(string $key)
@@ -204,9 +203,7 @@ LUA;
         return Str::cutStr($key, $prefix);
     }
 
-
     /**
-     * @param int $type
      * @return Strings|Hashes|Set|Zset|Lists|array
      */
     public function getDataType(int $type)
@@ -229,7 +226,6 @@ LUA;
     }
 
     /**
-     * @param string $key
      * @return array
      */
     protected function exists(string $key)

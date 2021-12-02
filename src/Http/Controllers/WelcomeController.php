@@ -2,7 +2,6 @@
 
 namespace Strays\DcatAdminRedis\Http\Controllers;
 
-
 use Dcat\Admin\Layout\Content;
 use Dcat\Admin\Layout\Row;
 use Strays\DcatAdminRedis\Examples\DatabaseStatistics;
@@ -16,6 +15,7 @@ class WelcomeController extends DcatAdminRedisController
     public function index(Content $content)
     {
         $connection = $this->manager();
+
         return $content
             ->header('数据统计')
             ->description('')
@@ -37,5 +37,4 @@ class WelcomeController extends DcatAdminRedisController
                 }
             );
     }
-
 }

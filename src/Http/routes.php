@@ -11,7 +11,3 @@ Route::get('dcat-admin-redis/{keys}/edit', [RedisController::class, 'edit'])->na
 Route::get('dcat-admin-redis/{keys}', [RedisController::class, 'show'])->name('dcat.admin.redis.show');
 Route::put('dcat-admin-redis/{keys}', [RedisController::class, 'update'])->name('dcat.admin.redis.update');
 Route::delete('dcat-admin-redis/{keys}', [RedisController::class, 'destroy'])->name('dcat.admin.redis.destroy');
-
-
-
-
