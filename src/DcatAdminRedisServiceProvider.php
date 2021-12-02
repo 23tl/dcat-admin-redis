@@ -22,12 +22,12 @@ class DcatAdminRedisServiceProvider extends ServiceProvider
         [
             'parent' => 'Dcat Redis', // 指定父级菜单
             'title' => 'statistics',
-            'uri' => 'dcat-admin-redis',
+            'uri' => 'dcat-admin-redis/welcome',
         ],
         [
             'parent' => 'Dcat Redis', // 指定父级菜单
             'title' => 'database',
-            'uri' => 'dcat-admin-redis/list',
+            'uri' => 'dcat-admin-redis',
         ]
     ];
 
