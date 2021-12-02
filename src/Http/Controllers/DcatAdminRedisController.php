@@ -2,7 +2,6 @@
 
 namespace Strays\DcatAdminRedis\Http\Controllers;
 
-
 use Illuminate\Routing\Controller;
 use Strays\DcatAdminRedis\RedisManager;
 

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Strays\DcatAdminRedis\DataType;
-
 
 class Set extends DataType
 {
@@ -10,7 +8,6 @@ class Set extends DataType
     {
         return $this->getConnection()->sMembers($key);
     }
-
 
     public function update(array $params)
     {
@@ -22,11 +19,9 @@ class Set extends DataType
         );
     }
 
-
     public function store(array $params)
     {
     }
-
 
     public function remove(array $params)
     {

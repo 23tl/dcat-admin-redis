@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Strays\DcatAdminRedis\DataType;
-
 
 class Lists extends DataType
 {
@@ -11,16 +9,13 @@ class Lists extends DataType
         return $this->getConnection()->lrange($key, 0, -1);
     }
 
-
     public function update(array $params)
     {
     }
 
-
     public function store(array $params)
     {
     }
-
 
     public function remove(array $params)
     {
@@ -28,6 +23,5 @@ class Lists extends DataType
 //            $q->lset($params['hash'], 0, $params['key']);
 //            $q->lrem($params['hash'], $params['key'], 2);
 //        });
-
     }
 }

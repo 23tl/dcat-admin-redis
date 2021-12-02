@@ -1,14 +1,15 @@
 <?php
 
-
 namespace Strays\DcatAdminRedis\Support;
 
 class Str
 {
     /**
-     * 返回截取指定字符串后面的字符
-     * @param string $string 字符串
-     * @param string|null $sign 指定字符串
+     * 返回截取指定字符串后面的字符.
+     *
+     * @param string      $string 字符串
+     * @param string|null $sign   指定字符串
+     *
      * @return string
      */
     public static function cutStr(string $string, string $sign = null)
@@ -16,9 +17,10 @@ class Str
         if (!$sign) {
             return $string;
         }
-        if (strpos($string, $sign) === false) {
+        if (false === strpos($string, $sign)) {
             return $string;
         }
+
         return ltrim(strrchr($string, $sign), $sign);
     }
 }

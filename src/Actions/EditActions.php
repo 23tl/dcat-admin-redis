@@ -11,7 +11,8 @@ use Strays\DcatAdminRedis\Forms\ZsetEditFrom;
 
 class EditActions extends RowAction
 {
-    protected $hash, $type;
+    protected $hash;
+    protected $type;
 
     public function __construct($title = null, $hash = null, $type = null)
     {

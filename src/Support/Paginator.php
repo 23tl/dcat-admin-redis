@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Strays\DcatAdminRedis\Support;
 
 use Illuminate\Pagination\Paginator as BasePaginator;
@@ -9,7 +8,8 @@ use Illuminate\Support\Str;
 
 class Paginator extends BasePaginator
 {
-    public $oldPage, $newPage = 0;
+    public $oldPage;
+    public $newPage = 0;
 
     public function __construct($items, $perPage, $oldPage = 0, $newPage = 0, $currentPage = null, array $options = [])
     {
@@ -33,10 +33,10 @@ class Paginator extends BasePaginator
             $parameters = array_merge($this->query, $parameters);
         }
 
-        return url()->current() . $this->path()
-            . (Str::contains($this->path(), '?') ? '&' : '?')
-            . Arr::query($parameters)
-            . $this->buildFragment();
+        return url()->current().$this->path()
+            .(Str::contains($this->path(), '?') ? '&' : '?')
+            .Arr::query($parameters)
+            .$this->buildFragment();
     }
 
     public function nextPageUrl()

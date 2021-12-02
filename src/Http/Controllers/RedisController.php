@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Strays\DcatAdminRedis\Http\Controllers;
 
 use Dcat\Admin\Form;
@@ -15,8 +14,8 @@ use Strays\DcatAdminRedis\Repository\RedisRepository;
 class RedisController extends DcatAdminRedisController
 {
     /**
-     * 列表
-     * @param Content $content
+     * 列表.
+     *
      * @return Content
      */
     public function index(Content $content)
@@ -27,9 +26,10 @@ class RedisController extends DcatAdminRedisController
     }
 
     /**
-     * 编辑
+     * 编辑.
+     *
      * @param $key
-     * @param Content $content
+     *
      * @return Content
      */
     public function edit($key, Content $content)
@@ -71,6 +71,7 @@ class RedisController extends DcatAdminRedisController
                 ]
             )
         );
+
         return (new Form())->response()->success('修改成功')->redirect('dcat-admin-redis');
     }
 
@@ -81,7 +82,6 @@ class RedisController extends DcatAdminRedisController
             ->body($this->getRedisValueShowView($key));
     }
 
-
     public function destroy($key)
     {
         $this->manager()->delKeys(explode(',', $key));
@@ -90,21 +90,22 @@ class RedisController extends DcatAdminRedisController
     }
 
     /**
-     * 设置数据源
+     * 设置数据源.
+     *
      * @return Grid
      */
     protected function grid()
     {
         return new Grid(
             new RedisRepository(), function (Grid $grid) {
-            $grid->column('key');
-            $grid->column('type')->badge(RedisManager::$typeColor);
-            $grid->column('ttl');
-            $grid->disableCreateButton();
-            $grid->actions(
+                $grid->column('key');
+                $grid->column('type')->badge(RedisManager::$typeColor);
+                $grid->column('ttl');
+                $grid->disableCreateButton();
+                $grid->actions(
                 function (Grid\Displayers\Actions $actions) {
                     $rowArray = $actions->row->toArray();
-                    if ($rowArray['type'] === 'string') {
+                    if ('string' === $rowArray['type']) {
                         $actions->disableView();
                     } else {
                         $actions->disableEdit();
@@ -112,18 +113,18 @@ class RedisController extends DcatAdminRedisController
                 }
             );
 
-            $grid->quickSearch(
+                $grid->quickSearch(
                 function ($model, $query) {
                     $model->where('key', $query);
                 }
             )->placeholder('搜索...');
-        }
+            }
         );
     }
 
     /**
      * 列表模板
-     * @param string $key
+     *
      * @return Grid
      */
     protected function getRedisValueShowView(string $key)
@@ -144,24 +145,24 @@ class RedisController extends DcatAdminRedisController
 
     /**
      * Hash 列表模板
-     * @param string $key
+     *
      * @return Grid
      */
     private function hashListView(string $key)
     {
         return new Grid(
             new RedisRepository(), function (Grid $grid) use ($key) {
-            $grid->number('ID');
-            $grid->column('key');
-            $grid->column('value');
-            $grid->disablePagination();
-            $grid->disableBatchDelete();
-            $grid->model()->setData(
+                $grid->number('ID');
+                $grid->column('key');
+                $grid->column('value');
+                $grid->disablePagination();
+                $grid->disableBatchDelete();
+                $grid->model()->setData(
                 $grid->model()->repository()->hGet($key)
             );
 
-            $grid->disableCreateButton();
-            $grid->actions(
+                $grid->disableCreateButton();
+                $grid->actions(
                 function (Grid\Displayers\Actions $actions) use ($key) {
                     $actions->disableView();
                     $actions->disableEdit();
@@ -170,28 +171,28 @@ class RedisController extends DcatAdminRedisController
                     $actions->append(new DeleteActions('Delete', $key, Redis::REDIS_HASH));
                 }
             );
-        }
+            }
         );
     }
 
     /**
      * Set 列表模板
-     * @param string $key
+     *
      * @return Grid
      */
     private function setListView(string $key)
     {
         return new Grid(
             new RedisRepository(), function (Grid $grid) use ($key) {
-            $grid->number('ID');
-            $grid->column('value');
-            $grid->disablePagination();
-            $grid->disableBatchDelete();
-            $grid->model()->setData(
+                $grid->number('ID');
+                $grid->column('value');
+                $grid->disablePagination();
+                $grid->disableBatchDelete();
+                $grid->model()->setData(
                 $grid->model()->repository()->hGet($key)
             );
-            $grid->disableCreateButton();
-            $grid->actions(
+                $grid->disableCreateButton();
+                $grid->actions(
                 function (Grid\Displayers\Actions $actions) use ($key) {
                     $actions->disableView();
                     $actions->disableEdit();
@@ -200,28 +201,27 @@ class RedisController extends DcatAdminRedisController
                     $actions->append(new DeleteActions('Delete', $key, Redis::REDIS_SET));
                 }
             );
-        }
+            }
         );
     }
 
     /**
-     * @param string $key
      * @return Grid
      */
     private function zSetListView(string $key)
     {
         return new Grid(
             new RedisRepository(), function (Grid $grid) use ($key) {
-            $grid->number('ID');
-            $grid->column('score');
-            $grid->column('member');
-            $grid->disablePagination();
-            $grid->disableBatchDelete();
-            $grid->model()->setData(
+                $grid->number('ID');
+                $grid->column('score');
+                $grid->column('member');
+                $grid->disablePagination();
+                $grid->disableBatchDelete();
+                $grid->model()->setData(
                 $grid->model()->repository()->zSet($key)
             );
-            $grid->disableCreateButton();
-            $grid->actions(
+                $grid->disableCreateButton();
+                $grid->actions(
                 function (Grid\Displayers\Actions $actions) use ($key) {
                     $actions->disableView();
                     $actions->disableEdit();
@@ -230,28 +230,27 @@ class RedisController extends DcatAdminRedisController
                     $actions->append(new DeleteActions('Delete', $key, Redis::REDIS_ZSET));
                 }
             );
-        }
+            }
         );
     }
 
     /**
-     * @param string $key
      * @return Grid
      */
     private function listView(string $key)
     {
         return new Grid(
             new RedisRepository(), function (Grid $grid) use ($key) {
-            $grid->number('ID');
-            $grid->column('value');
-            $grid->disablePagination();
-            $grid->disableBatchDelete();
-            $grid->model()->setData(
+                $grid->number('ID');
+                $grid->column('value');
+                $grid->disablePagination();
+                $grid->disableBatchDelete();
+                $grid->model()->setData(
                 $grid->model()->repository()->hGet($key)
             );
-            $grid->disableCreateButton();
-            $grid->actions(
-                function (Grid\Displayers\Actions $actions) use ($key) {
+                $grid->disableCreateButton();
+                $grid->actions(
+                function (Grid\Displayers\Actions $actions) {
                     $actions->disableView();
                     $actions->disableEdit();
                     $actions->disableDelete();
@@ -259,7 +258,7 @@ class RedisController extends DcatAdminRedisController
                     // $actions->append(new DeleteActions('Delete', $key, Redis::REDIS_LIST));
                 }
             );
-        }
+            }
         );
     }
 }

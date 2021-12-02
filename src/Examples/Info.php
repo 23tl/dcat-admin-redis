@@ -2,7 +2,6 @@
 
 namespace Strays\DcatAdminRedis\Examples;
 
-
 use Dcat\Admin\Grid;
 use Dcat\Admin\Widgets\Metrics\Donut;
 use Strays\DcatAdminRedis\Support\Trans;
@@ -16,6 +15,7 @@ class Info extends Donut
 
     /**
      * Service constructor.
+     *
      * @param $connection
      */
     public function __construct($connection)
@@ -25,9 +25,6 @@ class Info extends Donut
         parent::__construct();
     }
 
-    /**
-     *
-     */
     protected function init()
     {
         parent::init();
@@ -35,20 +32,19 @@ class Info extends Donut
         $this->title(Trans::get('welcome.info'));
     }
 
-
     public function renderContent()
     {
         return new Grid(
             null, function (Grid $grid) {
-            $grid->column('name');
-            $grid->column('value');
+                $grid->column('name');
+                $grid->column('value');
 
-            $grid->disableActions();
-            $grid->disablePagination();
-            $grid->disableToolbar();
-            $grid->disableRowSelector();
-            $grid->model()->setData($this->generate());
-        }
+                $grid->disableActions();
+                $grid->disablePagination();
+                $grid->disableToolbar();
+                $grid->disableRowSelector();
+                $grid->model()->setData($this->generate());
+            }
         );
     }
 
@@ -65,7 +61,7 @@ class Info extends Donut
                 'value' => $value,
             ];
         }
+
         return $data;
     }
-
 }
