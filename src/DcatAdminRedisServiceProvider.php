@@ -28,7 +28,7 @@ class DcatAdminRedisServiceProvider extends ServiceProvider
             'parent' => 'Dcat Redis', // 指定父级菜单
             'title' => 'database',
             'uri' => 'dcat-admin-redis',
-        ]
+        ],
     ];
 
     public function register()
