@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Strays\DcatAdminRedis\DataType;
-
 
 class Zset extends DataType
 {
@@ -10,7 +8,6 @@ class Zset extends DataType
     {
         return $this->getConnection()->zrange($key, 0, -1, true);
     }
-
 
     public function update(array $params)
     {
@@ -28,11 +25,9 @@ class Zset extends DataType
         }
     }
 
-
     public function store(array $params)
     {
     }
-
 
     public function remove(array $params)
     {

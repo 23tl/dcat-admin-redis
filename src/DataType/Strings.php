@@ -7,22 +7,16 @@ use Strays\DcatAdminRedis\Support\Str;
 
 class Strings extends DataType
 {
-
     public function fetch(string $key)
     {
         return $this->getConnection()->get($key);
     }
-
 
     public function update(array $params)
     {
         $this->store($params);
     }
 
-
-    /**
-     * @param array $params
-     */
     public function store(array $params)
     {
         $prefix = config('database.redis.options.prefix');

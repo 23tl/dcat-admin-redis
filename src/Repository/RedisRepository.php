@@ -47,7 +47,7 @@ class RedisRepository implements Repository
         $newPage = $model->filter()->input('new_page');
         // 不知道什么原因，第一次迭代时，0必须是 string ，后续迭代为 int
         if ($newPage) {
-            $newPage = (int)$newPage;
+            $newPage = (int) $newPage;
         } else {
             $newPage = '0';
         }
@@ -101,8 +101,6 @@ class RedisRepository implements Repository
     }
 
     /**
-     * @param Form $form
-     * @param array $deletingData
      * @return bool
      */
     public function delete(Form $form, array $deletingData)
@@ -111,7 +109,6 @@ class RedisRepository implements Repository
     }
 
     /**
-     * @param string $key
      * @return array
      */
     public function hGet(string $key)
@@ -133,7 +130,6 @@ class RedisRepository implements Repository
     }
 
     /**
-     * @param string $key
      * @return array
      */
     public function zSet(string $key)
@@ -153,5 +149,4 @@ class RedisRepository implements Repository
 
         return $data;
     }
-
 }
